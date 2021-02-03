@@ -1,3 +1,4 @@
+from core.settings import JWT_SECRET_KEY
 from django.shortcuts import render
 from rest_framework.generics import GenericAPIView
 from .serializers import UserSerializer, LoginSerializer
@@ -30,7 +31,8 @@ class LoginView(GenericAPIView):
         user = auth.authenticate(email=email, password=password)
 
         if user:
-            auth_token = jwt.encode({'email': user.email}, key="jdhkkzkdhkjshjuiwibaop3wbjjs", algorithm="HS256")
+            auth_token = jwt.encode(
+                {'email': user.email}, key=JWT_SECRET_KEY, algorithm="HS256")
             # Key Should come from Environment Variable however due to some reasons its not working.
             serializer = UserSerializer(user)
 

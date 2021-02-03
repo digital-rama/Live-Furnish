@@ -1,6 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser
-from django.contrib.auth.models import PermissionsMixin
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
 
@@ -9,10 +8,13 @@ from .managers import CustomUserManager
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField("Email Address", unique=True)
-    first_name= models.CharField("First Name",max_length=255, null=True, blank=True)
-    last_name= models.CharField("Last Name",max_length=255, null=True, blank=True)
+    first_name = models.CharField(
+        "First Name", max_length=255, null=True, blank=True)
+    last_name = models.CharField(
+        "Last Name", max_length=255, null=True, blank=True)
     mobile_no = models.CharField("Mobile Number", max_length=50)
-    date_of_birth = models.DateField("Date of Birth", auto_now=False, auto_now_add=False, null=True, blank=True)
+    date_of_birth = models.DateField(
+        "Date of Birth", auto_now=False, auto_now_add=False, null=True, blank=True)
     address = models.TextField("Address")
     is_staff = models.BooleanField(default=False)
     is_supervisor = models.BooleanField(default=False)
